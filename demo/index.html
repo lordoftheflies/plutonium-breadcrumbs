@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>plutonium-breadcrumbs demo</title>
+
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+
+    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+    <link rel="import" href="../plutonium-breadcrumbs.html">
+
+    <custom-style>
+        <style is="custom-style" include="demo-pages-shared-styles">
+            .crumb-link {
+                text-align: center;
+                text-decoration: none;
+
+            }
+        </style>
+    </custom-style>
+</head>
+<body>
+<div class="vertical-section-container centered">
+    <h3>Basic plutonium-breadcrumbs demo</h3>
+    <demo-snippet>
+        <template>
+            <plutonium-breadcrumbs>
+                <div slot="crumb">
+                    <a href="#">Crumb #0</a>
+                </div>
+                <div slot="crumb">
+                    <a href="#">Crumb #1</a>
+                </div>
+                <div slot="crumb">
+                    <a href="#">Crumb #2</a>
+                </div>
+                <div slot="crumb">
+                    <a href="#">Crumb #3</a>
+                </div>
+            </plutonium-breadcrumbs>
+        </template>
+    </demo-snippet>
+</div>
+</body>
+</html>
