@@ -1,0 +1,114 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../iron-icon/iron-icon.html">
+<link rel="import" href="../iron-selector/iron-selector.html">
+<link rel="import" href="../iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="plutonium-shared-icons.html">
+
+<dom-module id="plutonium-breadcrumbs">
+    <template>
+        <style include="iron-flex iron-flex-alignment">
+            :host {
+                display: inline-block;
+                @apply --layout-flex;
+                @apply --layout-horizontal;
+            }
+
+            ::slotted([slot=crumb]) {
+                display: block;
+                white-space: pre;
+                text-decoration: none;
+                @apply --layout-horizontal;
+                @apply --layout-flex;
+                text-align: center;
+            }
+
+            /*::slotted(.iron-selected) {*/
+            /*color: var(--plutonium-breadcrumbs-selected-color, --accent-color);*/
+            /*}*/
+
+
+        </style>
+
+        <iron-selector class="layout horizontal" selected$="{{selectedCrumb}}">
+
+            <slot id="crumbContainerSlot" name="crumb"></slot>
+
+        </iron-selector>
+    </template>
+
+    <script>
+
+        /**
+         * `plutonium-panels`
+         * Polymer 2.0 based panels for progressive web frontend.
+         *
+         * @customElement
+         * @polymer
+         * @demo demo/index.html
+         */
+        class PlutoniumBreadcrumbsControl extends Polymer.Element {
+            static get is() {
+                return 'plutonium-breadcrumbs';
+            }
+
+            static get properties() {
+                return {
+                    selectedCrumb: {
+                        type: Number,
+                        notify: true,
+                        value: () => 0
+                    }
+                };
+            }
+
+            connectedCallback() {
+                super.connectedCallback();
+                let self = this;
+                this._observer = new Polymer.FlattenedNodesObserver(this.$.crumbContainerSlot, (info) => {
+                    this._processNewCrumbNodes(info.addedNodes);
+                    this._processRemovedCrumbNodes(info.removedNodes);
+                });
+            }
+
+            _processNewCrumbNodes(nodes) {
+                let self = this;
+                nodes.forEach((value, index, array) => {
+                    if (value.lastElementChild && value.lastElementChild.tagName === 'A') {
+                        value.lastElementChild.setAttribute('class', 'crumb-link');
+                        if (index < array.length - 1) {
+                            let ironIcon = document.createElement('iron-icon');
+                            self._applyIconElementAttributes(ironIcon);
+                            ironIcon = Polymer.dom(value.parentElement).insertBefore(ironIcon, value.nextElementSibling);
+                            value.setAttribute('class', 'crumb-container');
+                            ironIcon.updateStyles({
+                                '--iron-icon-width': '24px',
+                                '--iron-icon-height': '24px'
+                            });
+                        }
+                    }
+                });
+                this.updateStyles({
+                    '--iron-icon-width': '24px',
+                    '--iron-icon-height': '24px'
+                });
+            }
+
+            _processRemovedCrumbNodes(nodes) {
+
+            }
+
+            _applyIconElementAttributes(ironIcon) {
+                ironIcon.setAttribute('icon', 'plutonium-shared-icons:chevron-right');
+                ironIcon.setAttribute('class', 'crumb-icon');
+                ironIcon.setAttribute('slot', 'crumb');
+                ironIcon.setAttribute('width', '24px');
+                ironIcon.width = '24px';
+                ironIcon.height = '24px';
+                ironIcon.setAttribute('height', '24px');
+                ironIcon.setAttribute('style', 'width: 24px; height: 24px;');
+            }
+        }
+
+        window.customElements.define(PlutoniumBreadcrumbsControl.is, PlutoniumBreadcrumbsControl);
+    </script>
+</dom-module>
