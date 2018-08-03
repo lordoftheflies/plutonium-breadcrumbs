@@ -1,6 +1,7 @@
 {
   "name": "plutonium-breadcrumbs",
   "description": "Polymer 2.0 based breadcumbs element",
+  "version": "0.0.1",
   "main": "plutonium-breadcrumbs.html",
   "dependencies": {
     "polymer": "Polymer/polymer#^2.0.0",
