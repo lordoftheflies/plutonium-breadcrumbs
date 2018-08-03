@@ -2,7 +2,9 @@
 
 # \<plutonium-breadcrumbs\>
 
-Polymer 2.0 based breadcumbs element
+Polymer 2.0 based breadcumbs element.
+
+A “breadcrumb” (or “breadcrumb trail”) is a type of secondary navigation scheme that reveals the user’s location in a website or Web application. The term comes from the Hansel and Gretel fairy tale in which the two title children drop breadcrumbs to form a trail back to their home. Just like in the tale, breadcrumbs in real-world applications offer users a way to trace the path back to their original landing point.
 
 ## Installation
 
